@@ -8,6 +8,11 @@ export default (mapStoreToProps, options) => {
 
         let props = mapStoreToProps(state, dispatch, ownProps);
 
+        if (typeof props !== 'object') {
+            console.error('mapStoreToProps() must return a plain object. Check you haven\'t missed a return statement.');
+            return props;
+        }
+
         Object.keys(props).map(key => {
             if (typeof props[key] === 'function') {
                 let _prop = props[key];
