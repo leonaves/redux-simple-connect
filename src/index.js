@@ -6,7 +6,19 @@ export default (mapStoreToProps, options) => {
         let { state } = stateObject;
         let { dispatch } = dispatchObject;
 
-        return mapStoreToProps(state, dispatch, ownProps)
+        let props = mapStoreToProps(state, dispatch, ownProps);
+
+        Object.keys(props).map(key => {
+            if (typeof props[key] === 'function') {
+                let _prop = props[key];
+                props[key] = (...args) => {
+                    let action = _prop(...args);
+                    if (action !== undefined) dispatch(action);
+                }
+            }
+        });
+
+        return props;
     };
 
     return connect(
