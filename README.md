@@ -22,6 +22,7 @@ connect([mapStoreToProps], [options])
 import connect from 'redux-simple-connect';
 import { mostRecentRecord, allRecords } from '../selectors';
 import { displayRecord } from '../actions'
+import RecordList from '../components/RecordList';
 
 const mapStoreToProps = (state, dispatch, ownProps) => {
     return{
@@ -46,7 +47,7 @@ This is a convenience mostly for cleaner code, but pay attention, as it could tr
 
 **Unlike the default `connect` function Redux Simple Connect automatically dispatches any actions returned from property functions. If you are ignoring your return values right now you may end up accidentally dispatching something you didn't mean to.**
 
-Let me try to explain. Do you find yourself doing this in yoru container components?
+Let me try to explain. Do you find yourself doing this in your container components?
 
 ```js
 onAddItem: () => dispatch(myAddAction()),
